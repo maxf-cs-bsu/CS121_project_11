@@ -1,5 +1,21 @@
-# Bank on it - Part 1
+# Bank on it - Part 2
 ### UML provided on lab assignment page.
+# Admin
+### String menu()
+```
+System.out.println("0) Exit")
+System.out.println("1) Full Customer Report")
+System.out.println("2) Add User")
+System.out.println("3) Apply interest to accounts")
+System.out.print("Action: ")
+
+return user's input as response
+```
+### getReport()
+```
+Using the getReport() function inside of customer.java, for each customer in the databash, call onto getReport()
+```
+### 
 # CheckingAccount()
 ### String menu()
 ```
