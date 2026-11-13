@@ -10,6 +10,7 @@ public class Bank implements HasMenu {
   } // end of main
   
   public Bank(){
+    this.loadSampleCustomers();
     this.start();
   } // end of constructor
 
@@ -36,15 +37,87 @@ public class Bank implements HasMenu {
         keepGoing = false;
       } else if (result.equals("1")){
         System.out.println("Admin menu");
+	if (this.admin.login()){
+          startAdmin();
+	} // end if
       } else if (result.equals("2")){
         System.out.println("Customer menu");
+	this.loginAsCustomer();
       } else {
         System.out.println("Please enter 0, 1, or 2...");
       } // end of if
     } // end of while
   } // end of start
   
+  public void startAdmin(){
+    boolean keepGoing = true;
+    while(keepGoing){
+      String result = admin.menu();
+      if (result.equals("0")){
+        keepGoing = false;
+      } else if (result.equals("1")){
+        System.out.println("Full customer report");
+	this.reportAllCustomers();
+      } else if (result.equals("2")){
+        System.out.println("Add user");
+	this.addUser();
+      } else if (result.equals("3")){
+        System.out.println("Apply interest to savings");
+	this.applyInterest();
+      } else {
+        System.out.println("Enter 0, 1, 2, or 3...");
+      } // end of if
+    } // end of keepGoing
+  } // end of startAdmin
+  
+  public void loadSampleCustomers(){
+    customers.add(new Customer("Alex", "1111"));
+    customers.add(new Customer("Brett", "2222"));
+    customers.add(new Customer("Carl", "3333")); 
+  } // end of loadSampleCustomers
+  
+  public void reportAllCustomers(){
+    for (Customer customer: customers){
+      System.out.println(customer.getReport());
+    } // end for
+  } // end of reportAllCustomers
+  
+  public void addUser(){
+    Scanner input = new Scanner(System.in);
+    System.out.print("User name: ");
+    String userName = input.nextLine();
+    System.out.print("PIN: ");
+    String PIN = input.nextLine();
+    customers.add(new Customer(userName, PIN));
+  } // end of addUser
 
+  public void applyInterest(){
+    for (Customer customer: customers){
+      customer.savings.calcInterest();
+    } // end of for loop
+  } // end of applyInterest
+  
+  public void loginAsCustomer(){
+    Scanner input = new Scanner(System.in);
+    System.out.print("User name: ");
+    String userNameIn = input.nextLine();
+    System.out.print("PIN: ");
+    String PINIn = input.nextLine();
+    
+    Customer currentCustomer = null;
+    for (Customer customer: customers){
+      if (customer.login(userNameIn, PINIn)){
+        currentCustomer = customer;
+      } // end if
+    } // end for
+
+    if (currentCustomer == null){
+      System.out.println("Customer not found...");
+    } else {
+      currentCustomer.start();
+    } // end if
+  } // end of loginAsCustomer
+  
 } // end of Bank class
 
-class CustomerList extends ArrayList<CustomerList> {};
+class CustomerList extends ArrayList<Customer> {};
