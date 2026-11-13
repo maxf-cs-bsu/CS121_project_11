@@ -1,5 +1,5 @@
 import java.util.*;
-import jave.io.*;
+import java.io.*;
 
 public class Admin extends User implements HasMenu, Serializable {
   
@@ -35,7 +35,7 @@ public class Admin extends User implements HasMenu, Serializable {
 
   public String getReport(){
     String report = "Admin userName: " + this.getUserName();
-    report += ", Admin PIN: " + this.PIN();
+    report += ", Admin PIN: " + this.getPIN();
     
     return report;
   } // end of getReport()
