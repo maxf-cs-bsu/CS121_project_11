@@ -1,5 +1,21 @@
 # Bank on it - Part 2
 ### UML provided on lab assignment page.
+# Bank
+### reportAllCustomers
+```
+for every customer
+  print with .getReport
+```
+### addUser
+```
+prompt user to make a userName and PIN
+add userNameIn, PINIn to customerList
+```
+### apply Interrest
+```
+for every customer
+  apply .calcInterest to savings amount
+```
 # Admin
 ### String menu()
 ```
